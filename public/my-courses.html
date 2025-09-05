@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Courses - CoursePlatform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Course<span class="spancolor">Platform</span></a>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <div id="nav-links" class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- <a href="my-courses.html">My course</a> -->
+        <a id="loginLink" href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <h2 class="page-title">My Enrolled Courses</h2>
+    <div class="courses-grid" id="myCoursesContainer"></div>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 CoursePlatform. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a> |
+      <a href="courses.html">Courses</a> |
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+  <script src="../js/auth.js"></script>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login first");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const myCoursesContainer = document.getElementById("myCoursesContainer");
+
+      try {
+        const res = await fetch("/api/courses/my", {
+          headers: { Authorization: "Bearer " + token },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch enrolled courses");
+
+        const courses = await res.json();
+
+        if (courses.length === 0) {
+          myCoursesContainer.innerHTML =
+            "<p >You haven’t enrolled in any courses yet.</p>";
+          return;
+        }
+
+        courses.forEach((course) => {
+          const div = document.createElement("div");
+          div.className = "course-card";
+          div.innerHTML = `
+          <img src="/uploads/${course.thumbnail}" alt="${course.title}">
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+          <p><strong>Price:</strong> ${course.price}</p>
+        `;
+          myCoursesContainer.appendChild(div);
+        });
+      } catch (err) {
+        alert("Error loading enrolled courses: " + err.message);
+      }
+    });
+  </script>
+  <script src="../js/script.js"></script>
+
+</body>
+
+</html>

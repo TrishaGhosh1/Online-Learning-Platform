@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - CoursePlatform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Course<span class="spancolor">Platform</span></a>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+
+      <div id="nav-links" class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a id="loginLink" href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="page-container">
+    <h2 class="page-title">Contact<span style="color:#f1c40f;"> Us</span></h2>
+
+    <!-- Flex container for text and form -->
+    <div
+      style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: flex-start; margin-top: 30px;">
+
+      <!-- Left side: Intro Text -->
+      <div class="intro-text" style="flex: 1; min-width: 280px;">
+        <p style="font-size: 1.2em; color: #555;">
+          Whether you have a question about our courses, need help with enrollment, or just want to say hello —
+          we’re here for you! Our team is passionate about helping learners like you succeed. Drop us a message and
+          we’ll get back to you as soon as possible.
+        </p>
+      </div>
+
+      <!-- Right side: Contact Form -->
+      <div id="contact-box">
+        <form class="contact-form" id="contact-form">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <p id="thankYouMessage" style="display:none; color: green; font-weight: bold; margin-top: 20px; text-align:center;">
+    ✅ Thank you for your message! We’ll get back to you soon.
+  </p>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 CoursePlatform. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a> |
+      <a href="courses.html">Courses</a> |
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+  <script src="../js/auth.js"></script>
+  <script src="../js/script.js"></script>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    const thankYouMessage = document.getElementById("thankYouMessage");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // stop form from refreshing page
+      form.reset();
+      thankYouMessage.style.display = "block"; // show thank you
+    });
+  </script>
+
+
+
+</body>
+
+</html>

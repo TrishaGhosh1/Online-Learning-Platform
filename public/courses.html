@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Courses - CoursePlatform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Course<span class="spancolor">Platform</span></a>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+
+      <div id="nav-links" class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a id="loginLink" href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Courses Section -->
+  <div class="page-container">
+    <h2 class="page-title">Courses</h2>
+    <div class="courses-grid" id="coursesContainer">
+      <!-- Dynamic courses will be injected here -->
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 CoursePlatform. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a> |
+      <a href="courses.html">Courses</a> |
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+  <script src="../js/auth.js"></script>
+  <script src="../js/script.js"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login first");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const coursesContainer = document.getElementById("coursesContainer");
+
+      try {
+        // Fetch courses from backend
+        const res = await fetch("/api/courses", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch courses");
+
+        const data = await res.json(); // should be an array of courses
+
+        // Clear container
+        coursesContainer.innerHTML = "";
+
+        data.forEach(course => {
+          const div = document.createElement("div");
+          div.className = "course-card";
+          div.innerHTML = `
+            <img src="/uploads/${course.thumbnail}" alt="${course.title}">
+            <h3>${course.title}</h3>
+            <p>${course.description}</p>
+            <p><strong>Price:</strong> ${course.price}</p>
+            <button class="btn enroll-btn" data-course-id="${course._id}">Enroll</button>
+          `;
+          coursesContainer.appendChild(div);
+        });
+      } catch (err) {
+        alert("Error loading courses: " + err.message);
+      }
+    });
+
+    // Handle enroll button clicks (event delegation)
+    document.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("enroll-btn")) {
+        const courseId = e.target.getAttribute("data-course-id");
+        const token = localStorage.getItem("token");
+
+        try {
+          const res = await fetch(`/api/courses/enroll/${courseId}`, {
+            method: "POST",
+            headers: { "Authorization": "Bearer " + token }
+          });
+
+          const result = await res.json();
+          alert(result.message);
+        } catch (err) {
+          alert("Enrollment failed: " + err.message);
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - CoursePlatform</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+ .page-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.page-title {
+  text-align: center; /* Centered heading  */
+  font-size: 36px;
+  margin-bottom: 40px; /* space after heading */
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.about-text-section {
+  flex: 1 1 400px;
+}
+
+.about-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: #f1c40f;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #d4ac0d;
+}
+
+.about-image-section {
+  flex: 1 1 400px;
+}
+
+.about-image {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+
+</style>  
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Course<span class="spancolor">Platform</span></a>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <div id="nav-links" class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+        <a  id="loginLink" href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+<div class="page-container">
+  <h2 class="page-title">About <span style="color:#f1c40f;">Us</span></h2>
+  <div class="about-content">
+    <div class="about-text-section">
+      <p class="about-text">
+        CoursePlatform is an online learning hub designed to provide quality education accessible to everyone. 
+        We offer beginner to advanced courses, hands-on projects, and personalized mentorship to help learners achieve their career goals.
+      </p>
+     
+      <p class="about-text">
+        We believe learning should be interactive, flexible, and fun. Our community of learners and mentors supports each other, sharing knowledge, tips, and inspiration to help everyone succeed. 
+        Whether you are starting a new career, enhancing your skills, or pursuing a passion, CoursePlatform is here to guide your journey.
+      </p>
+      <a href="courses.html" class="btn">Explore Courses</a>
+    </div>
+    <div class="about-image-section">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/010/120/421/small_2x/back-to-school-join-to-online-learning-with-school-supplies-and-equipment-laptop-computer-screen-with-phone-and-school-accessories-and-textbooks-on-yellow-and-blue-background-cartoon-3d-rendering-photo.jpg"alt="Online Learning" class="about-image">
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 CoursePlatform. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="about.html">About</a> |
+      <a href="courses.html">Courses</a> |
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+
+<script src="../js/script.js"></script>
+
+
+<script src="../js/auth.js"></script>
+
+</body>
+</html>
